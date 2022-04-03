@@ -4,7 +4,7 @@ const thoughtController = {
     // get all thoughts
     getThoughts(req, res){
         Thought.find({})
-        .select(['-id'])
+        .sort({ _id: -1 })
         .then(dbThoughtData => res.json(dbThoughtData))
         .catch(err => {
             console.log(err);
@@ -86,6 +86,7 @@ const thoughtController = {
         })
         .catch(err => res.json(err));
     },
+    
     // remove reaction
     deleteReaction({ params }, res){
         Thought.findOneAndUpdate(
